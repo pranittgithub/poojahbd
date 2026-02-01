@@ -1,51 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Zeyada&display=swap');
 
-
-
-
 body {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-
   background-size: 1000px;
   background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
   background-position: center center;
+  overflow: hidden;
 }
 
+/* PAPER */
 .paper {
   background-image: url("https://i0.wp.com/textures.world/wp-content/uploads/2018/10/2-Millimeter-Paper-Background-copy.jpg?ssl=1");
   background-size: 500px;
   background-position: center center;
-  padding: 20px 100px;
-/*  min-width: 800px; */
-  
-  transform: rotateZ(-5deg);
-  box-shadow: 1px 15px 20px 0px rgba(0,0,0,0.5);
-  
+
+  padding: 20px 60px;   /* reduced for mobile */
   position: absolute;
+
+  transform: rotateZ(-5deg);
+  box-shadow: 1px 15px 20px rgba(0,0,0,0.5);
+
+  touch-action: none;
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  will-change: transform;
 }
 
+/* ACTIVE DRAG */
+.paper.active {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  transform: scale(1.05);
+  cursor: grabbing;
+}
+
+/* HEART PAPER */
 .paper.heart {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   padding: 0;
   border-radius: 50%;
-}
-
-.paper.image {
-  padding: 10px;
-}
-.paper.image p {
-  font-size: 30px;
-}
-
-img {
-  max-height: 200px;
-  width: 100%;
-  user-select: none;
 }
 
 .paper.heart::after {
@@ -56,37 +53,47 @@ img {
   position: absolute;
   top: 0;
   left: 0;
-  background-size: 150px;
+  background-size: 140px;
   background-position: center center;
   background-repeat: no-repeat;
   opacity: 0.6;
 }
 
+/* IMAGE PAPERS */
+.paper.image {
+  padding: 12px;
+  width: 260px;              /* FIX: force width to stop iPhone stretch */
+}
+
+.paper.image p {
+  font-size: 30px;
+  text-align: center;
+}
+
+/* 🚨 IMPORTANT IMAGE FIX (iPhone Safari) */
+.paper.image img {
+  display: block;
+  width: 100%;
+  height: auto;              /* prevents stretch */
+  max-height: 220px;
+  object-fit: contain;       /* keeps aspect ratio */
+  user-select: none;
+
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* TEXT */
 p {
   font-family: 'Zeyada';
-  font-size: 50px;
+  font-size: 48px;
   color: rgb(0,0,100);
   opacity: 0.75;
   user-select: none;
-  
-   filter: drop-shadow(2px 1.5px 1px rgba(0,0,105,0.9));
+  filter: drop-shadow(2px 1.5px 1px rgba(0,0,105,0.9));
 }
 
-
-.paper {
-  touch-action: none;
-  cursor: grab;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  will-change: transform;
-}
-
-.paper.active {
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-  transform: scale(1.05);
-  cursor: grabbing;
-}
-
-/* Heart pop animation */
+/* 💖 HEART POP */
 .heart-pop {
   position: fixed;
   font-size: 18px;
@@ -102,5 +109,20 @@ p {
   100% {
     transform: scale(1.5) translateY(-40px);
     opacity: 0;
+  }
+}
+
+/* 📱 MOBILE OPTIMIZATION */
+@media (max-width: 600px) {
+  .paper {
+    padding: 16px 24px;
+  }
+
+  .paper.image {
+    width: 220px;
+  }
+
+  p {
+    font-size: 38px;
   }
 }

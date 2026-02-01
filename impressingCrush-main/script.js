@@ -21,6 +21,7 @@ class Paper {
   rotation = Math.random() * 30 - 15;
   currentPaperX = 0;
   currentPaperY = 0;
+  inertiaFrame = null;
 
   init(paper) {
 
@@ -36,6 +37,9 @@ class Paper {
       this.currentPaperX += this.velX;
       this.currentPaperY += this.velY;
 
+      // subtle tilt while dragging
+      this.rotation += this.velX * 0.02;
+
       this.prevMouseX = this.mouseX;
       this.prevMouseY = this.mouseY;
 
@@ -44,6 +48,11 @@ class Paper {
         translateY(${this.currentPaperY}px)
         rotateZ(${this.rotation}deg)
       `;
+
+      // random hearts while dragging
+      if (Math.random() > 0.92) {
+        spawnHeart(this.mouseX, this.mouseY);
+      }
     });
 
     paper.addEventListener('mousedown', (e) => {
@@ -54,6 +63,9 @@ class Paper {
 
       this.prevMouseX = e.clientX;
       this.prevMouseY = e.clientY;
+
+      // stop old inertia
+      if (this.inertiaFrame) cancelAnimationFrame(this.inertiaFrame);
     });
 
     window.addEventListener('mouseup', () => {
@@ -62,8 +74,22 @@ class Paper {
       this.holdingPaper = false;
       paper.classList.remove('active');
 
-      this.currentPaperX += this.velX * 2;
-      this.currentPaperY += this.velY * 2;
+      // start inertia
+      this.applyInertia(paper);
+
+      spawnHeart(this.mouseX, this.mouseY);
+    });
+  }
+
+  applyInertia(paper) {
+    let friction = 0.92;
+
+    const animate = () => {
+      this.velX *= friction;
+      this.velY *= friction;
+
+      this.currentPaperX += this.velX;
+      this.currentPaperY += this.velY;
 
       paper.style.transform = `
         translateX(${this.currentPaperX}px)
@@ -71,8 +97,12 @@ class Paper {
         rotateZ(${this.rotation}deg)
       `;
 
-      spawnHeart(this.mouseX, this.mouseY);
-    });
+      if (Math.abs(this.velX) > 0.3 || Math.abs(this.velY) > 0.3) {
+        this.inertiaFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animate();
   }
 }
 
