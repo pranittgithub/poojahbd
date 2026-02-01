@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday ❤️</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&display=swap">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<!-- 🎵 Background Music -->
+<audio id="bgm" loop>
+  <source src="images/music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="playMusic">▶ Play Music ❤️</button>
+
+<style>
+  #playMusic {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 34px;
+    font-family: 'Short Stack', cursive;
+    z-index: 99999;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+</style>
+
+<script>
+  const music = document.getElementById('bgm');
+  const btn = document.getElementById('playMusic');
+
+  btn.addEventListener('click', () => {
+    music.play();
+    btn.style.display = 'none';
+  });
+</script>
+
+
+<!-- ❤️ Heart Shape -->
+<div class="paper heart"></div>
+
+<!-- 🎂 Birthday Wish -->
+<div class="paper image">
+  <p>HAPPY , HAPPY</p>
+  <p>BIRTHDAYYYY 😍</p>
+  <img src="images/pic1.jpeg" />
+</div>
+
+<div class="paper image">
+  <img src="images/pic2.jpeg" />
+</div>
+
+<div class="paper image">
+  <img src="images/pic3.jpeg" />
+</div>
+
+<div class="paper image">
+  <img src="images/pic4.jpeg" />
+</div>
+
+<div class="paper image">
+  <img src="images/pic5.jpeg" />
+</div>
+
+<div class="paper image">
+  <img src="images/pic8.jpeg" />
+</div>
+
+<div class="paper image">
+  <img src="images/pic10.jpeg" />
+</div>
+
+<div class="paper image">
+  <p>How can someone</p>
+  <p>be so Amazing ❤️</p>
+  <img src="images/pic9.jpeg" />
+</div>
+
+<!-- 💕 Cute Compliment -->
+<div class="paper red">
+  <p class="p1">and the Best</p>
+  <p class="p2">Person 😍</p>
+</div>
+
+<div class="paper">
+  <p class="p1">You are Cuteee</p>
+  <p class="p1">Amazing <span style="color:red;">❤️</span></p>
+</div>
+
+<!-- 💌 LOVE LETTER (NEW) -->
+<div class="paper">
+  <p class="p1">My Love ❤️</p>
+  <p class="p2">
+    I didn’t plan to fall for you,<br>
+    but you became my favorite feeling.<br><br>
+    Thank you for being you 💕
+  </p>
+</div>
+
+<!-- 🎁 FINAL EMOTIONAL SURPRISE (NEW) -->
+<div class="paper red">
+  <p class="p1">One Last Thing 💖</p>
+  <p class="p2">
+    No matter where life takes us,<br>
+    I choose YOU. Always ❤️
+  </p>
+</div>
+
+<!-- 👆 Instruction -->
+<div class="paper">
+  <p class="p1">
+    SURPRISEEEEEE!!!!<br>
+    Drag the papers to move!
+  </p>
+</div>
+
+<!-- JS -->
+<script src="./mobile.js"></script>
+
+</body>
+</html>
